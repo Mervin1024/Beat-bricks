@@ -14,6 +14,8 @@
 		C9FCD1CF1B73B8B500383834 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9FCD1CE1B73B8B500383834 /* Images.xcassets */; };
 		C9FCD1D21B73B8B500383834 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FCD1D01B73B8B500383834 /* LaunchScreen.xib */; };
 		C9FCD1DE1B73B8B600383834 /* Beat_bricksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1DD1B73B8B600383834 /* Beat_bricksTests.m */; };
+		C9FCD1EF1B74C66900383834 /* FowardElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1EE1B74C66900383834 /* FowardElement.m */; };
+		C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1F41B74DBD800383834 /* SmallBall.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		C9FCD1D71B73B8B600383834 /* Beat-bricksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beat-bricksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9FCD1DC1B73B8B600383834 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9FCD1DD1B73B8B600383834 /* Beat_bricksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Beat_bricksTests.m; sourceTree = "<group>"; };
+		C9FCD1ED1B74C66900383834 /* FowardElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FowardElement.h; sourceTree = "<group>"; };
+		C9FCD1EE1B74C66900383834 /* FowardElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FowardElement.m; sourceTree = "<group>"; };
+		C9FCD1F31B74DBD800383834 /* SmallBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallBall.h; sourceTree = "<group>"; };
+		C9FCD1F41B74DBD800383834 /* SmallBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallBall.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,8 @@
 		C9FCD1C01B73B8B500383834 /* Beat-bricks */ = {
 			isa = PBXGroup;
 			children = (
+				C9FCD1EC1B74C57E00383834 /* Controller */,
+				C9FCD1E81B74A25C00383834 /* View */,
 				C9FCD1C51B73B8B500383834 /* AppDelegate.h */,
 				C9FCD1C61B73B8B500383834 /* AppDelegate.m */,
 				C9FCD1C81B73B8B500383834 /* ViewController.h */,
@@ -117,6 +125,24 @@
 				C9FCD1DC1B73B8B600383834 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9FCD1E81B74A25C00383834 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9FCD1ED1B74C66900383834 /* FowardElement.h */,
+				C9FCD1EE1B74C66900383834 /* FowardElement.m */,
+				C9FCD1F31B74DBD800383834 /* SmallBall.h */,
+				C9FCD1F41B74DBD800383834 /* SmallBall.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C9FCD1EC1B74C57E00383834 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +247,9 @@
 			files = (
 				C9FCD1CA1B73B8B500383834 /* ViewController.m in Sources */,
 				C9FCD1C71B73B8B500383834 /* AppDelegate.m in Sources */,
+				C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */,
 				C9FCD1C41B73B8B500383834 /* main.m in Sources */,
+				C9FCD1EF1B74C66900383834 /* FowardElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
