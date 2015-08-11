@@ -8,13 +8,6 @@
 
 #import "FowardElement.h"
 
-typedef NS_ENUM(NSInteger, SmallBallStrikeBound) {
-    SmallBallStrikeLeftBound,
-    SmallBallStrikeRightBound,
-    SmallBallStrikeTopBound,
-    SmallBallStrikeBottomBound
-};
-
 @interface SmallBall : FowardElement
 - (instancetype)initWithCenter:(CGPoint)center size:(CGSize)size;
 @end

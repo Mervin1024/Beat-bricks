@@ -11,7 +11,7 @@
 @interface ViewController ()<FowardElementDelegate>{
 //    BOOL start;
     CGPoint initailCenter;
-    SmallBallStrikeBound smallBallStrikeBound;
+    StrikeBound smallBallStrikeBound;
 }
 
 @end
@@ -68,19 +68,19 @@
 
 - (BOOL)changingMotionState{
     if (smallBall.fowardElementBounds.lowerBounds >= self.line.center.y) {
-        smallBallStrikeBound = SmallBallStrikeBottomBound;
+        smallBallStrikeBound = StrikeBottomBound;
         return YES;
     }
     if (smallBall.fowardElementBounds.upperBounds <= 0) {
-        smallBallStrikeBound = SmallBallStrikeTopBound;
+        smallBallStrikeBound = StrikeTopBound;
         return YES;
     }
     if (smallBall.fowardElementBounds.rightBounds >= self.view.frame.size.width) {
-        smallBallStrikeBound = SmallBallStrikeRightBound;
+        smallBallStrikeBound = StrikeRightBound;
         return YES;
     }
     if (smallBall.fowardElementBounds.leftBounds <= 0) {
-        smallBallStrikeBound = SmallBallStrikeLeftBound;
+        smallBallStrikeBound = StrikeLeftBound;
         return YES;
     }
     return NO;
@@ -92,16 +92,16 @@
     double angle = sender.currentAngle;
     double newAngle = 0;
     switch (smallBallStrikeBound) {
-        case SmallBallStrikeLeftBound:
+        case StrikeLeftBound:
             newAngle = 180-angle;
             break;
-        case SmallBallStrikeRightBound:
+        case StrikeRightBound:
             newAngle = 180-angle;
             break;
-        case SmallBallStrikeTopBound:
+        case StrikeTopBound:
             newAngle = 360-angle;
             break;
-        case SmallBallStrikeBottomBound:
+        case StrikeBottomBound:
             newAngle = 360-angle;
             break;
         default:

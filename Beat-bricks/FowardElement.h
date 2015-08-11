@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef NS_ENUM(NSInteger, StrikeBound) {
+    StrikeLeftBound,
+    StrikeRightBound,
+    StrikeTopBound,
+    StrikeBottomBound
+};
+
 @class FowardElement;
 @protocol FowardElementDelegate <NSObject>
 @optional
