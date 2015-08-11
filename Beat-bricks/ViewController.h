@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SmallBall.h"
+#import "TouchView.h"
+#import "Baffle.h"
 
 @interface ViewController : UIViewController
 
-- (IBAction)begin:(id)sender;
 @property (strong, nonatomic, readonly) SmallBall *smallBall;
-@property (weak, nonatomic) IBOutlet UILabel *line;
-@property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) Baffle *baffle;
+@property (strong, nonatomic)  UIButton *startButton;
 @end
 

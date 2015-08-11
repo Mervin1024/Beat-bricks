@@ -15,41 +15,9 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-hO-doz">
-                                <rect key="frame" x="0.0" y="559" width="600" height="6"/>
-                                <color key="backgroundColor" red="0.97360697750000003" green="0.3757407452" blue="0.018700458949999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="6" id="zkP-fB-rWB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="5"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy7-th-LVG">
-                                <rect key="frame" x="285" y="140" width="31" height="30"/>
-                                <state key="normal" title="start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="begin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cqV-yQ-nCn"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="0.96551029177100645" green="1" blue="0.42404090720996346" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="o4s-hO-doz" secondAttribute="bottom" constant="35" id="DUT-iC-0Af"/>
-                            <constraint firstItem="o4s-hO-doz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Lcf-tn-P6J"/>
-                            <constraint firstAttribute="centerY" secondItem="vy7-th-LVG" secondAttribute="centerY" constant="145" id="SGN-9Y-ai7"/>
-                            <constraint firstAttribute="trailing" secondItem="o4s-hO-doz" secondAttribute="trailing" id="TD4-Sf-Y5g"/>
-                            <constraint firstAttribute="centerX" secondItem="vy7-th-LVG" secondAttribute="centerX" id="zqW-1V-UrV"/>
-                        </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <connections>
-                        <outlet property="line" destination="o4s-hO-doz" id="Dbv-Nf-2db"/>
-                        <outlet property="startButton" destination="vy7-th-LVG" id="jV8-lb-zb2"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

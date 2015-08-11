@@ -11,7 +11,7 @@
 @implementation SmallBall
 
 - (instancetype)initWithFrame:(CGRect)frame{
-    if ((self = [super initWithFrame:frame image:[UIImage imageNamed:@"GreenBall"]])) {
+    if ((self = [super initWithFrame:frame image:[UIImage imageNamed:@"BlueBall"]])) {
         
     }
     return self;
@@ -26,4 +26,11 @@
     return self;
 }
 
++ (instancetype)smallBallWithCenter:(CGPoint)center size:(CGSize)size{
+    return [[SmallBall alloc]initWithCenter:center size:size];
+}
+
+- (NSDictionary *(^)(void))terminationConditionOfSportsSpirit{
+    return [self.smallBallDelegate terminationConditionOfSmallBall:self];
+}
 @end

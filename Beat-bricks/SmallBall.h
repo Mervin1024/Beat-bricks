@@ -6,8 +6,18 @@
 //  Copyright (c) 2015年 Mervin. All rights reserved.
 //
 
-#import "FowardElement.h"
+#import "SportsSpirit.h"
+@class SmallBall;
+@protocol SmallBallDelegate <NSObject>
 
-@interface SmallBall : FowardElement
+- (NSDictionary *(^)(void))terminationConditionOfSmallBall:(SmallBall *)sender;
+
+@end
+
+@interface SmallBall : SportsSpirit
+
 - (instancetype)initWithCenter:(CGPoint)center size:(CGSize)size;
++ (instancetype)smallBallWithCenter:(CGPoint)center size:(CGSize)size;
+
+@property (nonatomic, weak) id<SmallBallDelegate> smallBallDelegate;
 @end

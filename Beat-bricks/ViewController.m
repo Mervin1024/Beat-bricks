@@ -8,22 +8,28 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()<FowardElementDelegate>{
+@interface ViewController ()<SmallBallDelegate>{
 //    BOOL start;
     CGPoint initailCenter;
-    StrikeBound smallBallStrikeBound;
+    StrikeBoundState smallBallStrikeBound;
 }
 
 @end
 
 @implementation ViewController
-//@synthesize movementState,initialAngle,initialCenter,sizeOfBall;
-//@synthesize smallBall;
-//static double step = 5.00;
+CGFloat const ballSize = 18.0f;
+CGFloat const lineHeight = 6.0f;
+CGFloat const lineWidth = 100.0f;
+CGFloat const distanceOfLine = 35.0f;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self initValue];
+    
     [self initBall];
+    NSLog(@"%ld",self.view.subviews.count);
+    [self initBaffle];
+    NSLog(@"%ld",self.view.subviews.count);
+    [self initButton];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -32,64 +38,74 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (void)initValue{
-//    movementState = NO;
-//    initialAngle = M_PI_4;
-//    sizeOfBall = (CGSize){32,32};
-//    initialCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-35-6-sizeOfBall.height/2);
-//    
-//}
-
 - (void)initBall{
 //    start = NO;
-    CGSize size = (CGSize){18,18};
-    initailCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-35-5-size.height/2);
-    _smallBall = [[SmallBall alloc]initWithCenter:initailCenter size:size];
-    _smallBall.delegate = self;
-//    NSLog(@"%ld",[self.view subviews].count);
+    CGSize size = (CGSize){ballSize,ballSize};
+    initailCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-distanceOfLine-lineHeight-size.height/2);
+    _smallBall = [SmallBall smallBallWithCenter:initailCenter size:size];
+    _smallBall.smallBallDelegate = self;
     [self.view addSubview:_smallBall];
-//    NSLog(@"%ld",[self.view subviews].count);
 }
 
-- (IBAction)begin:(id)sender {
+- (void)initBaffle{
+    _baffle = [Baffle baffleWithFrame:CGRectMake(self.view.center.x-lineWidth/2, self.view.frame.size.height-distanceOfLine-lineHeight, lineWidth, lineHeight) superView:self.view];
+    [self.view addSubview:_baffle];
+}
+
+- (void)initButton{
+    _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _startButton.frame = CGRectMake(self.view.center.x-20, 35, 40, 20);
+    [_startButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [_startButton setTitle:@"start" forState:UIControlStateNormal];
+    [_startButton addTarget:self action:@selector(begin:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_startButton];
+}
+
+- (void)begin:(id)sender {
     if (!_smallBall.movementState) {
-        [_smallBall setFowardElementCenter:initailCenter];
+        _baffle.touchView.alpha = 1;
+        [_smallBall setSportsSpiritCenter:initailCenter];
         _smallBall.movementState = YES;
-        [self.startButton setTitle:@"stop" forState:UIControlStateNormal];
-        [_smallBall fowardWithAngle:60 velocity:20.0 stopCondition:^{
-            return [self changingMotionState];
-        }];
+        [_startButton setTitle:@"stop" forState:UIControlStateNormal];
+        [_smallBall fowardWithAngle:60 velocity:20.0];
     }else{
+        _baffle.touchView.alpha = 0;
         _smallBall.movementState = NO;
-        [self.startButton setTitle:@"start" forState:UIControlStateNormal];
-        [_smallBall setFowardElementCenter:initailCenter];
+        [_startButton setTitle:@"start" forState:UIControlStateNormal];
+        [_smallBall setSportsSpiritCenter:initailCenter];
     }
 }
 
-- (BOOL)changingMotionState{
-    if (_smallBall.fowardElementBounds.lowerBounds >= self.line.center.y) {
-        smallBallStrikeBound = StrikeBottomBound;
-        return YES;
-    }
-    if (_smallBall.fowardElementBounds.upperBounds <= 0) {
-        smallBallStrikeBound = StrikeTopBound;
-        return YES;
-    }
-    if (_smallBall.fowardElementBounds.rightBounds >= self.view.frame.size.width) {
-        smallBallStrikeBound = StrikeRightBound;
-        return YES;
-    }
-    if (_smallBall.fowardElementBounds.leftBounds <= 0) {
-        smallBallStrikeBound = StrikeLeftBound;
-        return YES;
-    }
-    return NO;
+- (NSDictionary *(^)(void))terminationConditionOfSmallBall:(SportsSpirit *)sender{
+    NSDictionary *(^changeAngle)(void) = ^(){
+        if (_smallBall.currentBounds.bottomBounds >= self.baffle.center.y) {
+            smallBallStrikeBound = StrikeBottomBound;
+            return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
+        }
+        if (_smallBall.currentBounds.topBounds <= 0) {
+            smallBallStrikeBound = StrikeTopBound;
+            return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
+        }
+        if (_smallBall.currentBounds.rightBounds >= self.view.frame.size.width) {
+            smallBallStrikeBound = StrikeRightBound;
+            return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
+        }
+        if (_smallBall.currentBounds.leftBounds <= 0) {
+            smallBallStrikeBound = StrikeLeftBound;
+            return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
+        }
+        if (_smallBall.currentBounds.bottomBounds >= self.view.frame.size.height) {
+            return @{@"movementState":@NO};
+        }
+        return @{};
+    };
+    return changeAngle;
     
 }
 
 
-- (double)fowardAngleOfFowardElement:(FowardElement *)sender{
-    double angle = sender.currentAngle;
+- (double)fowardAngleOfSmallBall{
+    double angle = _smallBall.currentAngle;
     double newAngle = 0;
     switch (smallBallStrikeBound) {
         case StrikeLeftBound:
@@ -107,11 +123,8 @@
         default:
             break;
     }
+    smallBallStrikeBound = StrikeLeftNone;
     return newAngle;
-}
-
-- (BOOL)movementStateOfFowardElement:(FowardElement *)sender{
-    return YES;
 }
 
 @end
