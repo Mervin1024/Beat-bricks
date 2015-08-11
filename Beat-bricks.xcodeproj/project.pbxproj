@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2640A6A263693E6D57412440 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5837E0FF86AFDEF428F6C070 /* libPods.a */; };
 		C9FCD1C41B73B8B500383834 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1C31B73B8B500383834 /* main.m */; };
 		C9FCD1C71B73B8B500383834 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1C61B73B8B500383834 /* AppDelegate.m */; };
 		C9FCD1CA1B73B8B500383834 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1C91B73B8B500383834 /* ViewController.m */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5837E0FF86AFDEF428F6C070 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C6417EA4911E0C6F0495CFD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C9FCD1BE1B73B8B500383834 /* Beat-bricks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beat-bricks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9FCD1C21B73B8B500383834 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9FCD1C31B73B8B500383834 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 		C9FCD1EE1B74C66900383834 /* FowardElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FowardElement.m; sourceTree = "<group>"; };
 		C9FCD1F31B74DBD800383834 /* SmallBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallBall.h; sourceTree = "<group>"; };
 		C9FCD1F41B74DBD800383834 /* SmallBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallBall.m; sourceTree = "<group>"; };
+		D0048924D7AA061831A66C84 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2640A6A263693E6D57412440 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,12 +71,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A58BE20CDC90620C604733C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5837E0FF86AFDEF428F6C070 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1E8D1D08535D5E902959203 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C6417EA4911E0C6F0495CFD /* Pods.debug.xcconfig */,
+				D0048924D7AA061831A66C84 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C9FCD1B51B73B8B500383834 = {
 			isa = PBXGroup;
 			children = (
 				C9FCD1C01B73B8B500383834 /* Beat-bricks */,
 				C9FCD1DA1B73B8B600383834 /* Beat-bricksTests */,
 				C9FCD1BF1B73B8B500383834 /* Products */,
+				A1E8D1D08535D5E902959203 /* Pods */,
+				1A58BE20CDC90620C604733C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,9 +176,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9FCD1E11B73B8B600383834 /* Build configuration list for PBXNativeTarget "Beat-bricks" */;
 			buildPhases = (
+				E5E229EC402A959E8861176D /* Check Pods Manifest.lock */,
 				C9FCD1BA1B73B8B500383834 /* Sources */,
 				C9FCD1BB1B73B8B500383834 /* Frameworks */,
 				C9FCD1BC1B73B8B500383834 /* Resources */,
+				2CEFC7125AABA332C2648A77 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,6 +265,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2CEFC7125AABA332C2648A77 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5E229EC402A959E8861176D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C9FCD1BA1B73B8B500383834 /* Sources */ = {
@@ -329,6 +388,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -363,27 +423,32 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		C9FCD1E21B73B8B600383834 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C6417EA4911E0C6F0495CFD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Beat-bricks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		C9FCD1E31B73B8B600383834 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0048924D7AA061831A66C84 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Beat-bricks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
@@ -440,6 +505,7 @@
 				C9FCD1E31B73B8B600383834 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C9FCD1E41B73B8B600383834 /* Build configuration list for PBXNativeTarget "Beat-bricksTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +514,7 @@
 				C9FCD1E61B73B8B600383834 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

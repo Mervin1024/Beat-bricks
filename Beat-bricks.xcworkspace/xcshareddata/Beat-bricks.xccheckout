@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0AF8DA59-9EA4-4B28-ADD9-E8F92C5C0962</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Beat-bricks</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1DEF99D52D48EDEF3934E1AFF9832E71D98ADB21</key>
+		<string>https://github.com/Mervin1024/Beat-bricks.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Beat-bricks.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1DEF99D52D48EDEF3934E1AFF9832E71D98ADB21</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Mervin1024/Beat-bricks.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1DEF99D52D48EDEF3934E1AFF9832E71D98ADB21</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1DEF99D52D48EDEF3934E1AFF9832E71D98ADB21</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Beat-bricks</string>
+		</dict>
+	</array>
+</dict>
+</plist>

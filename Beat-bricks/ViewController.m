@@ -18,7 +18,7 @@
 
 @implementation ViewController
 //@synthesize movementState,initialAngle,initialCenter,sizeOfBall;
-@synthesize smallBall;
+//@synthesize smallBall;
 //static double step = 5.00;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,42 +44,42 @@
 //    start = NO;
     CGSize size = (CGSize){18,18};
     initailCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-35-5-size.height/2);
-    smallBall = [[SmallBall alloc]initWithCenter:initailCenter size:size];
-    smallBall.delegate = self;
+    _smallBall = [[SmallBall alloc]initWithCenter:initailCenter size:size];
+    _smallBall.delegate = self;
 //    NSLog(@"%ld",[self.view subviews].count);
-    [self.view addSubview:smallBall];
+    [self.view addSubview:_smallBall];
 //    NSLog(@"%ld",[self.view subviews].count);
 }
 
 - (IBAction)begin:(id)sender {
-    if (!smallBall.movementState) {
-        [smallBall setFowardElementCenter:initailCenter];
-        smallBall.movementState = YES;
+    if (!_smallBall.movementState) {
+        [_smallBall setFowardElementCenter:initailCenter];
+        _smallBall.movementState = YES;
         [self.startButton setTitle:@"stop" forState:UIControlStateNormal];
-        [smallBall fowardWithAngle:60 velocity:20.0 stopCondition:^{
+        [_smallBall fowardWithAngle:60 velocity:20.0 stopCondition:^{
             return [self changingMotionState];
         }];
     }else{
-        smallBall.movementState = NO;
+        _smallBall.movementState = NO;
         [self.startButton setTitle:@"start" forState:UIControlStateNormal];
-        [smallBall setFowardElementCenter:initailCenter];
+        [_smallBall setFowardElementCenter:initailCenter];
     }
 }
 
 - (BOOL)changingMotionState{
-    if (smallBall.fowardElementBounds.lowerBounds >= self.line.center.y) {
+    if (_smallBall.fowardElementBounds.lowerBounds >= self.line.center.y) {
         smallBallStrikeBound = StrikeBottomBound;
         return YES;
     }
-    if (smallBall.fowardElementBounds.upperBounds <= 0) {
+    if (_smallBall.fowardElementBounds.upperBounds <= 0) {
         smallBallStrikeBound = StrikeTopBound;
         return YES;
     }
-    if (smallBall.fowardElementBounds.rightBounds >= self.view.frame.size.width) {
+    if (_smallBall.fowardElementBounds.rightBounds >= self.view.frame.size.width) {
         smallBallStrikeBound = StrikeRightBound;
         return YES;
     }
-    if (smallBall.fowardElementBounds.leftBounds <= 0) {
+    if (_smallBall.fowardElementBounds.leftBounds <= 0) {
         smallBallStrikeBound = StrikeLeftBound;
         return YES;
     }
