@@ -19,23 +19,37 @@
 - (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)view{
     if ((self = [super initWithFrame:frame])) {
         self.image = [UIImage imageNamed:@"Baffle"];
+        _moveEnabled = NO;
         _touchView = [[TouchView alloc] initWithFrame:view.frame];
-        _touchView.alpha = 0;
         _touchView.delegate = self;
+        _currentCenter = self.center;
         [view addSubview:_touchView];
         
     }
     return self;
 }
 
-+ (instancetype)baffleWithFrame:(CGRect)frame superView:(UIView *)view{
-    return [[Baffle alloc]initWithFrame:frame superView:view];
+- (instancetype)initWithCenter:(CGPoint)center size:(CGSize)size superView:(UIView *)view{
+    self = [self initWithFrame:CGRectMake(center.x-size.width/2, center.y-size.height/2, size.width, size.height) superView:view];
+    return self;
+}
+
++ (instancetype)baffleWithCenter:(CGPoint)center size:(CGSize)size superView:(UIView *)view{
+    return [[Baffle alloc]initWithCenter:center size:size superView:view];
 }
 
 - (void)touchView:(TouchView *)view movePoint:(CGPoint)point{
-    CGPoint center = self.center;
-    center.x = point.x;
+    if (!_moveEnabled) {
+    }else{
+        CGPoint center = self.center;
+        center.x = point.x;
+        [self setBaffleCenter:center];
+    }
+}
+
+- (void)setBaffleCenter:(CGPoint)center{
     self.center = center;
+    _currentCenter = center;
 }
 
 @end

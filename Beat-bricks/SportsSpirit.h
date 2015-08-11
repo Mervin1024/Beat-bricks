@@ -24,18 +24,18 @@ typedef NS_ENUM(NSInteger, StrikeBoundState) {
 @end
 
 typedef struct {
-    CGFloat topBounds;
-    CGFloat bottomBounds;
-    CGFloat leftBounds;
-    CGFloat rightBounds;
-}SportsSpiritBounds;
+    CGPoint topPoint;
+    CGPoint bottomPoint;
+    CGPoint leftPoint;
+    CGPoint rightPoint;
+}SportsSpiritAroundPoint;
 
 @interface SportsSpirit : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame image:(UIImage *)image;
 @property (weak, nonatomic) id<SportsSpiritDelegate> delegate;
 
-@property (assign, nonatomic, readonly) SportsSpiritBounds currentBounds;
+@property (assign, nonatomic, readonly) SportsSpiritAroundPoint aroundPoint;
 @property (assign, nonatomic, readonly) CGPoint currentCenter;
 @property (assign, nonatomic, readonly) double currentAngle;
 

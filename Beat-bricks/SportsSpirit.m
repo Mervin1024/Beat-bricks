@@ -64,9 +64,7 @@
         return;
         
     }
-//    [UIView animateWithDuration:0.01 animations:^{
-        self.center = _currentCenter;
-//    }];
+    self.center = _currentCenter;
 
     NSDictionary *dic = @{@"velocity":@(velocity),@"angle":@(angle)};
     [self performSelector:@selector(repeat:) withObject:dic afterDelay:0.01];
@@ -80,12 +78,12 @@
     self.center = center;
     _currentCenter = center;
 }
-// rect边界
+// aroundPoint
 - (void)setCurrentBoundsWithCenter:(CGPoint)center{
-    _currentBounds.leftBounds = center.x - self.frame.size.width/2;
-    _currentBounds.rightBounds = center.x + self.frame.size.width/2;
-    _currentBounds.topBounds = center.y - self.frame.size.height/2;
-    _currentBounds.bottomBounds = center.y + self.frame.size.height/2;
+    _aroundPoint.leftPoint = (CGPoint){center.x - self.frame.size.width/2,center.y};
+    _aroundPoint.rightPoint = (CGPoint){center.x + self.frame.size.width/2,center.y};
+    _aroundPoint.topPoint = (CGPoint){center.x,center.y - self.frame.size.height/2};
+    _aroundPoint.bottomPoint = (CGPoint){center.x,center.y + self.frame.size.height/2};
 }
 
 @end

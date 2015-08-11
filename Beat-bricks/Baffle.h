@@ -12,7 +12,12 @@
 @interface Baffle : UIImageView<TouchViewDelegate>
 
 @property (strong, nonatomic) TouchView *touchView;
+@property (assign, nonatomic) BOOL moveEnabled;
+
+@property (assign, nonatomic, readonly) CGPoint currentCenter;
+- (void)setBaffleCenter:(CGPoint)center;
 
 - (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)view;
-+ (instancetype)baffleWithFrame:(CGRect)frame superView:(UIView *)view;
+- (instancetype)initWithCenter:(CGPoint)center size:(CGSize)size superView:(UIView *)view;
++ (instancetype)baffleWithCenter:(CGPoint)center size:(CGSize)size superView:(UIView *)view;
 @end

@@ -10,25 +10,23 @@
 
 @interface ViewController ()<SmallBallDelegate>{
 //    BOOL start;
-    CGPoint initailCenter;
+    CGPoint initailBallCenter;
+    CGPoint initailBaffleCenter;
     StrikeBoundState smallBallStrikeBound;
 }
 
 @end
 
 @implementation ViewController
-CGFloat const ballSize = 18.0f;
-CGFloat const lineHeight = 6.0f;
-CGFloat const lineWidth = 100.0f;
+CGSize const ballSize = (CGSize){18.0f,18.0f};
+CGSize const baffleSize = (CGSize){100.0f,6.0f};
 CGFloat const distanceOfLine = 35.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initBall];
-    NSLog(@"%ld",self.view.subviews.count);
     [self initBaffle];
-    NSLog(@"%ld",self.view.subviews.count);
     [self initButton];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -40,15 +38,15 @@ CGFloat const distanceOfLine = 35.0f;
 
 - (void)initBall{
 //    start = NO;
-    CGSize size = (CGSize){ballSize,ballSize};
-    initailCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-distanceOfLine-lineHeight-size.height/2);
-    _smallBall = [SmallBall smallBallWithCenter:initailCenter size:size];
+    initailBallCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-distanceOfLine-baffleSize.height-ballSize.height/2);
+    _smallBall = [SmallBall smallBallWithCenter:initailBallCenter size:ballSize];
     _smallBall.smallBallDelegate = self;
     [self.view addSubview:_smallBall];
 }
 
 - (void)initBaffle{
-    _baffle = [Baffle baffleWithFrame:CGRectMake(self.view.center.x-lineWidth/2, self.view.frame.size.height-distanceOfLine-lineHeight, lineWidth, lineHeight) superView:self.view];
+    initailBaffleCenter = (CGPoint){self.view.center.x, self.view.frame.size.height-distanceOfLine-baffleSize.height/2};
+    _baffle = [Baffle baffleWithCenter:initailBaffleCenter size:baffleSize superView:self.view];
     [self.view addSubview:_baffle];
 }
 
@@ -63,39 +61,44 @@ CGFloat const distanceOfLine = 35.0f;
 
 - (void)begin:(id)sender {
     if (!_smallBall.movementState) {
-        _baffle.touchView.alpha = 1;
-        [_smallBall setSportsSpiritCenter:initailCenter];
+        [_smallBall setSportsSpiritCenter:initailBallCenter];
+        [_baffle setBaffleCenter:initailBaffleCenter];
         _smallBall.movementState = YES;
+        _baffle.moveEnabled = YES;
         [_startButton setTitle:@"stop" forState:UIControlStateNormal];
-        [_smallBall fowardWithAngle:60 velocity:20.0];
+        [_smallBall fowardWithAngle:120 velocity:20.0];
     }else{
-        _baffle.touchView.alpha = 0;
         _smallBall.movementState = NO;
+        _baffle.moveEnabled = NO;
         [_startButton setTitle:@"start" forState:UIControlStateNormal];
-        [_smallBall setSportsSpiritCenter:initailCenter];
+        [_smallBall setSportsSpiritCenter:initailBallCenter];
+        [_baffle setBaffleCenter:initailBaffleCenter];
     }
 }
 
 - (NSDictionary *(^)(void))terminationConditionOfSmallBall:(SportsSpirit *)sender{
     NSDictionary *(^changeAngle)(void) = ^(){
-        if (_smallBall.currentBounds.bottomBounds >= self.baffle.center.y) {
+        
+        if ((NSInteger)_smallBall.aroundPoint.bottomPoint.y == (NSInteger)_baffle.currentCenter.y &&
+            _smallBall.aroundPoint.bottomPoint.x >= _baffle.currentCenter.x-baffleSize.width/2 &&
+            _smallBall.aroundPoint.bottomPoint.x <= _baffle.currentCenter.x+baffleSize.width/2) {
             smallBallStrikeBound = StrikeBottomBound;
             return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
         }
-        if (_smallBall.currentBounds.topBounds <= 0) {
+        if (_smallBall.aroundPoint.topPoint.y <= 0) {
             smallBallStrikeBound = StrikeTopBound;
             return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
         }
-        if (_smallBall.currentBounds.rightBounds >= self.view.frame.size.width) {
+        if (_smallBall.aroundPoint.rightPoint.x >= self.view.frame.size.width) {
             smallBallStrikeBound = StrikeRightBound;
             return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
         }
-        if (_smallBall.currentBounds.leftBounds <= 0) {
+        if (_smallBall.aroundPoint.leftPoint.x <= 0) {
             smallBallStrikeBound = StrikeLeftBound;
             return @{@"movementState":@YES,@"angle":@([self fowardAngleOfSmallBall])};
         }
-        if (_smallBall.currentBounds.bottomBounds >= self.view.frame.size.height) {
-            return @{@"movementState":@NO};
+        if (_smallBall.aroundPoint.bottomPoint.y >= self.view.frame.size.height) {
+            [self begin:nil];
         }
         return @{};
     };
