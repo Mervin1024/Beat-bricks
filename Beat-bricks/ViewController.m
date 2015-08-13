@@ -170,6 +170,9 @@ NSInteger const numberOfBricksAtRow = 17;
     [brick removeFromSuperview];
     [remainingBricks removeObject:brick];
     [bricksBeHit addObject:brick];
+    if (remainingBricks.count == 0) {
+        [self begin:nil];
+    }
     return YES;
 }
 
