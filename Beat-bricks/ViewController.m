@@ -48,9 +48,35 @@ NSInteger const numberOfBricksAtRow = 17;
     remainingBricks = [NSMutableArray array];
     bricksBeHit = [NSMutableArray array];
     CGFloat brickWidth = self.view.frame.size.width/numberOfBricksAtRow;
+    // 白色砖块
     for (int i = 0; i < 11; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/11) + self.view.center.x-brickWidth/2, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleWhite];
-        brick.tag = i + 10;
+        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/11) + self.view.center.x-brickWidth/2*1, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleWhite];
+        brick.Brickdelegate = self;
+        [self.view addSubview:brick];
+        [remainingBricks addObject:brick];
+    }
+    // 绿色砖块
+    for (int i = 0; i < 9; i++) {
+        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/9) + self.view.center.x-brickWidth/2*3, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleGreen];
+        brick.Brickdelegate = self;
+        [self.view addSubview:brick];
+        [remainingBricks addObject:brick];
+    }
+    for (int i = 0; i < 9; i++) {
+        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/9) + self.view.center.x+brickWidth/2*1, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleGreen];
+        brick.Brickdelegate = self;
+        [self.view addSubview:brick];
+        [remainingBricks addObject:brick];
+    }
+    // 橘红砖块
+    for (int i = 0; i < 7; i++) {
+        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/7) + self.view.center.x-brickWidth/2*5, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleOringe];
+        brick.Brickdelegate = self;
+        [self.view addSubview:brick];
+        [remainingBricks addObject:brick];
+    }
+    for (int i = 0; i < 7; i++) {
+        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/7) + self.view.center.x+brickWidth/2*3, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleOringe];
         brick.Brickdelegate = self;
         [self.view addSubview:brick];
         [remainingBricks addObject:brick];
@@ -89,7 +115,7 @@ NSInteger const numberOfBricksAtRow = 17;
         NSLog(@"START");
         // reset smallBall
          _smallBall.movementState = YES;
-        [_smallBall moveWithAngle:90 velocity:40.0];
+        [_smallBall moveWithAngle:60 velocity:40.0];
         // reset baffle
         _baffle.moveEnabled = YES;
         // reset startButton

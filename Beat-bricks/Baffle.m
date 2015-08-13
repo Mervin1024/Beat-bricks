@@ -42,7 +42,11 @@
     if (!_moveEnabled) {
     }else{
         CGPoint center = self.center;
-        center.x = point.x;
+        center.x += point.x;
+        CGFloat halfWidth = self.frame.size.width/2;
+        if (center.x - halfWidth <= 0 || center.x + halfWidth >= _touchView.frame.size.width) {
+            return;
+        }
         [self setBaffleCenter:center];
     }
 }
