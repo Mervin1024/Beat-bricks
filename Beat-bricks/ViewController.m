@@ -125,6 +125,7 @@ NSInteger const numberOfBricksAtRow = 17;
                 return [NSDictionary dictionaryWithDictionary:stateOfBallDidHit];
             }
             if (isHitWithBricks) {
+                isHitWithBricks = NO;
                 return [NSDictionary dictionaryWithDictionary:stateOfBallDidHit];
             }
             return @{};

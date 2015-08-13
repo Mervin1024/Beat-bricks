@@ -56,20 +56,24 @@
         ((NSInteger)smallBall.aroundPoint.topPoint.y == (NSInteger)self.frame.origin.y+self.frame.size.height &&
          smallBall.aroundPoint.topPoint.x >= self.frame.origin.x &&
          smallBall.aroundPoint.topPoint.x < self.frame.origin.x+self.frame.size.width)) {
-        [self.Brickdelegate birck:self
+//            NSLog(@"击中上下方");
+            [self.Brickdelegate birck:self
                       didHitAngle:(360-smallBall.currentAngle)
                          velocity:smallBall.currentVelocity];
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
     }else if (((NSInteger)smallBall.aroundPoint.leftPoint.x == (NSInteger)self.frame.origin.x &&
               smallBall.aroundPoint.leftPoint.y >= self.frame.origin.y &&
               smallBall.aroundPoint.leftPoint.y < self.frame.origin.y+self.frame.size.height) ||
         ((NSInteger)smallBall.aroundPoint.rightPoint.x == (NSInteger)self.frame.origin.x+self.frame.size.width &&
          smallBall.aroundPoint.rightPoint.y >= self.frame.origin.y &&
          smallBall.aroundPoint.rightPoint.y < self.frame.origin.y+self.frame.size.height)){
+//            NSLog(@"击中左右方");
             [self.Brickdelegate birck:self
                           didHitAngle:(180-smallBall.currentAngle)
                              velocity:smallBall.currentVelocity];
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
-
+    
 }
 
 @end
