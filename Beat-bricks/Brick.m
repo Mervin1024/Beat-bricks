@@ -35,6 +35,7 @@
     }
     if ((self = [super initWithFrame:frame image:[UIImage imageNamed:imageName]])) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isHitWithSmallBall:) name:@"SmallBallCurrentCenter" object:nil];
+        _hitEnabled = NO;
     }
     return self;
 }
@@ -48,30 +49,29 @@
 }
 
 - (void)isHitWithSmallBall:(NSNotification*)notification{
+    if (!_hitEnabled) {
+        return;
+    }
     NSDictionary *theData = [notification userInfo];
     SmallBall *smallBall = [theData objectForKey:@"smallBall"];
     if (((NSInteger)smallBall.aroundPoint.bottomPoint.y == (NSInteger)self.frame.origin.y &&
          smallBall.aroundPoint.bottomPoint.x >= self.frame.origin.x &&
          smallBall.aroundPoint.bottomPoint.x < self.frame.origin.x+self.frame.size.width) ||
-        ((NSInteger)smallBall.aroundPoint.topPoint.y == (NSInteger)self.frame.origin.y+self.frame.size.height &&
+        ((NSInteger)smallBall.aroundPoint.topPoint.y == (NSInteger)(self.frame.origin.y+self.frame.size.height) &&
          smallBall.aroundPoint.topPoint.x >= self.frame.origin.x &&
          smallBall.aroundPoint.topPoint.x < self.frame.origin.x+self.frame.size.width)) {
-//            NSLog(@"击中上下方");
             [self.Brickdelegate birck:self
                       didHitAngle:(360-smallBall.currentAngle)
                          velocity:smallBall.currentVelocity];
-            [[NSNotificationCenter defaultCenter] removeObserver:self];
     }else if (((NSInteger)smallBall.aroundPoint.leftPoint.x == (NSInteger)self.frame.origin.x &&
               smallBall.aroundPoint.leftPoint.y >= self.frame.origin.y &&
               smallBall.aroundPoint.leftPoint.y < self.frame.origin.y+self.frame.size.height) ||
-        ((NSInteger)smallBall.aroundPoint.rightPoint.x == (NSInteger)self.frame.origin.x+self.frame.size.width &&
+        ((NSInteger)smallBall.aroundPoint.rightPoint.x == (NSInteger)(self.frame.origin.x+self.frame.size.width) &&
          smallBall.aroundPoint.rightPoint.y >= self.frame.origin.y &&
          smallBall.aroundPoint.rightPoint.y < self.frame.origin.y+self.frame.size.height)){
-//            NSLog(@"击中左右方");
             [self.Brickdelegate birck:self
                           didHitAngle:(180-smallBall.currentAngle)
                              velocity:smallBall.currentVelocity];
-            [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
     
 }

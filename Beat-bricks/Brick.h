@@ -29,5 +29,7 @@ typedef NS_ENUM(NSInteger, BrickStyle) {
 - (instancetype)initWithFrame:(CGRect)frame style:(BrickStyle)style;
 + (instancetype)brickWithFrame:(CGRect)frame style:(BrickStyle)style;
 
+@property (assign, nonatomic) BOOL hitEnabled;
+
 @property (weak, nonatomic) id<BrickDelegate> Brickdelegate;
 @end

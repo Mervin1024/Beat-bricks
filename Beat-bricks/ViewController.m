@@ -49,7 +49,7 @@ NSInteger const numberOfBricksAtRow = 17;
     bricksBeHit = [NSMutableArray array];
     CGFloat brickWidth = self.view.frame.size.width/numberOfBricksAtRow;
     for (int i = 0; i < 11; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * i, brickHight * (i/11 + 1), brickWidth, brickHight) style:BrickStyleWhite];
+        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/11) + self.view.center.x-brickWidth/2, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleWhite];
         brick.tag = i + 10;
         brick.Brickdelegate = self;
         [self.view addSubview:brick];
@@ -57,6 +57,7 @@ NSInteger const numberOfBricksAtRow = 17;
     }
     isHitWithBricks = NO;
     _bricksOfAll = [NSArray arrayWithArray:remainingBricks];
+    
 }
 
 - (void)initBall{
@@ -76,7 +77,7 @@ NSInteger const numberOfBricksAtRow = 17;
 
 - (void)initButton{
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _startButton.frame = CGRectMake(self.view.center.x-20, 35, 40, 20);
+    _startButton.frame = CGRectMake(self.view.frame.origin.x+35, 35, 40, 20);
     [_startButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [_startButton setTitle:@"start" forState:UIControlStateNormal];
     [_startButton addTarget:self action:@selector(begin:) forControlEvents:UIControlEventTouchUpInside];
@@ -85,34 +86,39 @@ NSInteger const numberOfBricksAtRow = 17;
 
 - (void)begin:(id)sender {
     if (!_smallBall.movementState) {
+        NSLog(@"START");
         // reset smallBall
          _smallBall.movementState = YES;
-        [_smallBall moveWithAngle:120 velocity:20.0];
+        [_smallBall moveWithAngle:90 velocity:40.0];
         // reset baffle
         _baffle.moveEnabled = YES;
         // reset startButton
         [_startButton setTitle:@"stop" forState:UIControlStateNormal];
         // reset bricks
-        
+        for (Brick *brick in remainingBricks) {
+            brick.hitEnabled = YES;
+        }
         
     }else{
+        NSLog(@"STOP");
         // reset smallBall
-        [_smallBall setSportsSpiritCenter:initailBallCenter];
         _smallBall.movementState = NO;
+        [_smallBall setSportsSpiritCenter:initailBallCenter];
         // reset baffle
-        [_baffle setBaffleCenter:initailBaffleCenter];
         _baffle.moveEnabled = NO;
+        [_baffle setBaffleCenter:initailBaffleCenter];
         // reset startButton
         [_startButton setTitle:@"start" forState:UIControlStateNormal];
         // reset bricks
-        for (Brick *brick in remainingBricks) {
-            [brick removeFromSuperview];
-        }
-        for (Brick *brick in _bricksOfAll) {
-            [self.view addSubview:brick];
-        }
         
+        [remainingBricks addObjectsFromArray:bricksBeHit];
+        for (Brick *brick in bricksBeHit) {
+            [self.view addSubview:brick];
+            brick.hitEnabled = NO;
+        }
+        bricksBeHit = [NSMutableArray array];
     }
+    
 }
 
 #pragma mark - Small Ball Delegate
@@ -136,8 +142,8 @@ NSInteger const numberOfBricksAtRow = 17;
 // Baffle 与 SmallBall 碰撞检测
 - (BOOL)isHitWithBaffle{
     if ((NSInteger)_smallBall.aroundPoint.bottomPoint.y == (NSInteger)_baffle.currentCenter.y &&
-                   _smallBall.aroundPoint.bottomPoint.x >= _baffle.frame.origin.x &&
-                   _smallBall.aroundPoint.bottomPoint.x <= _baffle.frame.origin.x+baffleSize.width) {
+        _smallBall.aroundPoint.bottomPoint.x >= _baffle.frame.origin.x &&
+        _smallBall.aroundPoint.bottomPoint.x <= _baffle.frame.origin.x+baffleSize.width) {
         smallBallHitBound = HitBottomBound;
         return YES;
     }
@@ -170,9 +176,13 @@ NSInteger const numberOfBricksAtRow = 17;
     [brick removeFromSuperview];
     [remainingBricks removeObject:brick];
     [bricksBeHit addObject:brick];
+    brick.hitEnabled = NO;
     if (remainingBricks.count == 0) {
         [self begin:nil];
+        stateOfBallDidHit = @{};
     }
+    
+    
     return YES;
 }
 
