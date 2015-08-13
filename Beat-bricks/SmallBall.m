@@ -31,6 +31,9 @@
 }
 
 - (NSDictionary *(^)(void))terminationConditionOfSportsSpirit{
-    return [self.smallBallDelegate terminationConditionOfSmallBall:self];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SmallBallCurrentCenter" object:self userInfo:@{@"smallBall":self}];
+    return [self.delegate terminationConditionOfSportsSpirit:self];
 }
+
 @end

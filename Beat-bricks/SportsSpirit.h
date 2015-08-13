@@ -8,18 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, StrikeBoundState) {
-    StrikeLeftNone = 0,
-    StrikeLeftBound,
-    StrikeRightBound,
-    StrikeTopBound,
-    StrikeBottomBound
+typedef NS_ENUM(NSInteger, HitState) {
+    HitNone = 0,
+    HitLeftBound,
+    HitRightBound,
+    HitTopBound,
+    HitBottomBound
 };
 
 @class SportsSpirit;
 @protocol SportsSpiritDelegate <NSObject>
-
 - (NSDictionary *(^)(void))terminationConditionOfSportsSpirit:(SportsSpirit *)sender;
+@optional
+- (void)hitTheSportsSpirit:(SportsSpirit *)sender;
 
 @end
 
@@ -38,10 +39,11 @@ typedef struct {
 @property (assign, nonatomic, readonly) SportsSpiritAroundPoint aroundPoint;
 @property (assign, nonatomic, readonly) CGPoint currentCenter;
 @property (assign, nonatomic, readonly) double currentAngle;
+@property (assign, nonatomic, readonly) double currentVelocity;
 
 @property (assign, nonatomic) BOOL movementState;
 
 //                       angle(360°)             velocity = CGPoint/0.1s
-- (void)fowardWithAngle:(double)angle velocity:(double)velocity;
+- (void)moveWithAngle:(double)angle velocity:(double)velocity;
 - (void)setSportsSpiritCenter:(CGPoint)center;
 @end

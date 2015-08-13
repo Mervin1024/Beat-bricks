@@ -10,11 +10,14 @@
 #import "SmallBall.h"
 #import "TouchView.h"
 #import "Baffle.h"
+#import "Brick.h"
 
 @interface ViewController : UIViewController
 
-@property (strong, nonatomic, readonly) SmallBall *smallBall;
+@property (strong, nonatomic) SmallBall *smallBall;
 @property (strong, nonatomic) Baffle *baffle;
 @property (strong, nonatomic)  UIButton *startButton;
+@property (copy, nonatomic) NSArray *bricksOfAll;
+@property (assign, nonatomic, readonly) NSInteger life;
 @end
 
