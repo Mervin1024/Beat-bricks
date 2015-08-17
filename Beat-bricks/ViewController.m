@@ -17,13 +17,16 @@
     NSMutableArray *bricksBeHit;
     BOOL isHitWithBricks;
     NSDictionary *stateOfBallDidHit;
+    NSMutableArray *whiteBricks;
+    NSMutableArray *oringeBricks;
+    NSMutableArray *greenBricks;
 }
 
 @end
 
 @implementation ViewController
-CGSize const ballSize = (CGSize){18.0f,18.0f};
-CGSize const baffleSize = (CGSize){100.0f,6.0f};
+CGFloat const ballRadius = 60.0f;
+CGSize const baffleSize = (CGSize){100.0f,8.0f};
 CGFloat const distanceOfLine = 35.0f;
 CGFloat const brickHight = 15.0f;
 NSInteger const numberOfBricksAtRow = 17;
@@ -35,7 +38,7 @@ NSInteger const numberOfBricksAtRow = 17;
     [self initBall];
     [self initBaffle];
     [self initButton];
-    
+//    NSLog(@"%f",atan(-1)/M_PI*180);
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -47,56 +50,67 @@ NSInteger const numberOfBricksAtRow = 17;
 - (void)initBricks{
     remainingBricks = [NSMutableArray array];
     bricksBeHit = [NSMutableArray array];
-    CGFloat brickWidth = self.view.frame.size.width/numberOfBricksAtRow;
-    // 白色砖块
-    for (int i = 0; i < 11; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/11) + self.view.center.x-brickWidth/2*1, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleWhite];
-        brick.Brickdelegate = self;
-        [self.view addSubview:brick];
-        [remainingBricks addObject:brick];
-    }
-    // 绿色砖块
-    for (int i = 0; i < 9; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/9) + self.view.center.x-brickWidth/2*3, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleGreen];
-        brick.Brickdelegate = self;
-        [self.view addSubview:brick];
-        [remainingBricks addObject:brick];
-    }
-    for (int i = 0; i < 9; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/9) + self.view.center.x+brickWidth/2*1, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleGreen];
-        brick.Brickdelegate = self;
-        [self.view addSubview:brick];
-        [remainingBricks addObject:brick];
-    }
-    // 橘红砖块
-    for (int i = 0; i < 7; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/7) + self.view.center.x-brickWidth/2*5, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleOringe];
-        brick.Brickdelegate = self;
-        [self.view addSubview:brick];
-        [remainingBricks addObject:brick];
-    }
-    for (int i = 0; i < 7; i++) {
-        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/7) + self.view.center.x+brickWidth/2*3, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleOringe];
-        brick.Brickdelegate = self;
-        [self.view addSubview:brick];
-        [remainingBricks addObject:brick];
-    }
-    isHitWithBricks = NO;
+//    whiteBricks = [NSMutableArray array];
+//    oringeBricks = [NSMutableArray array];
+//    greenBricks = [NSMutableArray array];
+//    CGFloat brickWidth = self.view.frame.size.width/numberOfBricksAtRow;
+//    // 白色砖块
+//    for (int i = 0; i < 11; i++) {
+//        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/11) + self.view.center.x-brickWidth/2*1, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleWhite];
+//        brick.Brickdelegate = self;
+//        [self.view addSubview:brick];
+//        [whiteBricks addObject:brick];
+//    }
+//    // 绿色砖块
+//    for (int i = 0; i < 9; i++) {
+//        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/9) + self.view.center.x-brickWidth/2*3, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleGreen];
+//        brick.Brickdelegate = self;
+//        [self.view addSubview:brick];
+//        [greenBricks addObject:brick];
+//    }
+//    for (int i = 0; i < 9; i++) {
+//        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/9) + self.view.center.x+brickWidth/2*1, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleGreen];
+//        brick.Brickdelegate = self;
+//        [self.view addSubview:brick];
+//        [greenBricks addObject:brick];
+//    }
+//    // 橘红砖块
+//    for (int i = 0; i < 7; i++) {
+//        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/7) + self.view.center.x-brickWidth/2*5, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleOringe];
+//        brick.Brickdelegate = self;
+//        [self.view addSubview:brick];
+//        [oringeBricks addObject:brick];
+//    }
+//    for (int i = 0; i < 7; i++) {
+//        Brick *brick = [Brick brickWithFrame:CGRectMake(brickWidth * (i/7) + self.view.center.x+brickWidth/2*3, brickHight * (i/1 + 1), brickWidth, brickHight) style:BrickStyleOringe];
+//        brick.Brickdelegate = self;
+//        [self.view addSubview:brick];
+//        [oringeBricks addObject:brick];
+//    }
+//    isHitWithBricks = NO;
+//    [remainingBricks addObjectsFromArray:whiteBricks];
+//    [remainingBricks addObjectsFromArray:greenBricks];
+//    [remainingBricks addObjectsFromArray:oringeBricks];
+    Brick *brick = [Brick brickWithFrame:CGRectMake(130, 130, 100, 100) style:BrickStyleBlue];
+    brick.Brickdelegate = self;
+    [self.view addSubview:brick];
+    [remainingBricks addObject:brick];
     _bricksOfAll = [NSArray arrayWithArray:remainingBricks];
     
 }
 
 - (void)initBall{
 //    start = NO;
-    initailBallCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-distanceOfLine-baffleSize.height-ballSize.height/2);
-    _smallBall = [SmallBall smallBallWithCenter:initailBallCenter size:ballSize];
+//    initailBallCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-distanceOfLine-baffleSize.height-ballSize.height/2);
+    initailBallCenter = CGPointMake(ballRadius, 360-ballRadius);
+    _smallBall = [SmallBall smallBallWithCenter:initailBallCenter size:CGSizeMake(ballRadius, ballRadius)];
     _smallBall.delegate = self;
     [self.view addSubview:_smallBall];
     stateOfBallDidHit = [NSDictionary dictionary];
 }
 
 - (void)initBaffle{
-    initailBaffleCenter = (CGPoint){self.view.center.x, self.view.frame.size.height-distanceOfLine-baffleSize.height/2};
+    initailBaffleCenter = (CGPoint){400, self.view.frame.size.height-distanceOfLine-baffleSize.height/2};
     _baffle = [Baffle baffleWithCenter:initailBaffleCenter size:baffleSize superView:self.view];
     [self.view addSubview:_baffle];
 }
@@ -115,7 +129,7 @@ NSInteger const numberOfBricksAtRow = 17;
         NSLog(@"START");
         // reset smallBall
          _smallBall.movementState = YES;
-        [_smallBall moveWithAngle:60 velocity:40.0];
+        [_smallBall moveWithAngle:55 velocity:20.0];
         // reset baffle
         _baffle.moveEnabled = YES;
         // reset startButton
@@ -153,6 +167,7 @@ NSInteger const numberOfBricksAtRow = 17;
     if (_smallBall == sender) {
         return ^(){
             if ([self isHitWithBaffle] || [self isHitWithViewBounds]) {
+                
                 stateOfBallDidHit = @{@"movementState":@YES,@"angle":@([self angleOfSmallBallChanges])};
                 return [NSDictionary dictionaryWithDictionary:stateOfBallDidHit];
             }
@@ -167,11 +182,16 @@ NSInteger const numberOfBricksAtRow = 17;
 }
 // Baffle 与 SmallBall 碰撞检测
 - (BOOL)isHitWithBaffle{
-    if ((NSInteger)_smallBall.aroundPoint.bottomPoint.y == (NSInteger)_baffle.currentCenter.y &&
-        _smallBall.aroundPoint.bottomPoint.x >= _baffle.frame.origin.x &&
-        _smallBall.aroundPoint.bottomPoint.x <= _baffle.frame.origin.x+baffleSize.width) {
-        smallBallHitBound = HitBottomBound;
-        return YES;
+    CGFloat distance = _baffle.currentCenter.y - _smallBall.currentCenter.y;
+    if (distance < 0) {
+        return NO;
+    }
+    if (distance < _smallBall.radius){
+        if (_smallBall.aroundPoint.bottomPoint.x >= _baffle.frame.origin.x &&
+            _smallBall.aroundPoint.bottomPoint.x <= _baffle.frame.origin.x+baffleSize.width) {
+            smallBallHitBound = HitBottomBound;
+            return YES;
+        }
     }
     return NO;
 }
@@ -181,17 +201,32 @@ NSInteger const numberOfBricksAtRow = 17;
         smallBallHitBound = HitTopBound;
         return YES;
     }
-    if (_smallBall.aroundPoint.rightPoint.x >= self.view.frame.size.width) {
+//    if (_smallBall.aroundPoint.rightPoint.x >= self.view.frame.size.width) {
+//        smallBallHitBound = HitRightBound;
+//        return YES;
+//    }
+    
+    ///////////////////
+    if (_smallBall.aroundPoint.rightPoint.x >= 360) {
         smallBallHitBound = HitRightBound;
         return YES;
     }
+    ////////////////////
+    
     if (_smallBall.aroundPoint.leftPoint.x <= 0) {
         smallBallHitBound = HitLeftBound;
         return YES;
     }
-    if (_smallBall.aroundPoint.bottomPoint.y >= self.view.frame.size.height) {
-        [self begin:nil];
+//    if (_smallBall.aroundPoint.bottomPoint.y >= self.view.frame.size.height) {
+//        [self begin:nil];
+//    }
+    
+    ///////////////
+    if (_smallBall.aroundPoint.bottomPoint.y >= 360) {
+        smallBallHitBound = HitBottomBound;
+        return YES;
     }
+    //////////////
     return NO;
 }
 // Bricks 与 SmallBall 碰撞检测
@@ -199,10 +234,10 @@ NSInteger const numberOfBricksAtRow = 17;
 - (BOOL)birck:(Brick *)brick didHitAngle:(double)angle velocity:(double)velocity{
     isHitWithBricks = YES;
     stateOfBallDidHit = @{@"movementState":@YES,@"angle":@(angle)};
-    [brick removeFromSuperview];
-    [remainingBricks removeObject:brick];
-    [bricksBeHit addObject:brick];
-    brick.hitEnabled = NO;
+//    [brick removeFromSuperview];
+//    [remainingBricks removeObject:brick];
+//    [bricksBeHit addObject:brick];
+//    brick.hitEnabled = NO;
     if (remainingBricks.count == 0) {
         [self begin:nil];
         stateOfBallDidHit = @{};

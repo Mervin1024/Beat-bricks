@@ -20,4 +20,5 @@
 + (instancetype)smallBallWithCenter:(CGPoint)center size:(CGSize)size;
 
 //@property (nonatomic, weak) id<SmallBallDelegate> smallBallDelegate;
+@property (nonatomic, assign, readonly) CGFloat radius;
 @end

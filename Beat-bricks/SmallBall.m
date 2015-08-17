@@ -12,7 +12,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if ((self = [super initWithFrame:frame image:[UIImage imageNamed:@"BlueBall"]])) {
-        
+        _radius = frame.size.height/2;
     }
     return self;
 }
