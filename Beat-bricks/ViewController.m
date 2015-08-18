@@ -102,7 +102,7 @@ NSInteger const numberOfBricksAtRow = 17;
 - (void)initBall{
 //    start = NO;
 //    initailBallCenter = CGPointMake(self.view.center.x, self.view.frame.size.height-distanceOfLine-baffleSize.height-ballSize.height/2);
-    initailBallCenter = CGPointMake(ballRadius, 360-ballRadius);
+    initailBallCenter = CGPointMake(360-ballRadius, 360-ballRadius-100);
     _smallBall = [SmallBall smallBallWithCenter:initailBallCenter size:CGSizeMake(ballRadius, ballRadius)];
     _smallBall.delegate = self;
     [self.view addSubview:_smallBall];
@@ -129,7 +129,7 @@ NSInteger const numberOfBricksAtRow = 17;
         NSLog(@"START");
         // reset smallBall
          _smallBall.movementState = YES;
-        [_smallBall moveWithAngle:55 velocity:20.0];
+        [_smallBall moveWithAngle:160 velocity:10.0];
         // reset baffle
         _baffle.moveEnabled = YES;
         // reset startButton

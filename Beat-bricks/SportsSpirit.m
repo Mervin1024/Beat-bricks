@@ -93,4 +93,12 @@
     _aroundPoint.bottomPoint = (CGPoint){center.x,center.y + self.frame.size.height/2};
 }
 
++ (double)radianFromAngle:(double)angle{
+    return angle/180*M_PI;
+}
+
++ (double)angleFromRadian:(double)radian{
+    return radian/M_PI*180;
+}
+
 @end

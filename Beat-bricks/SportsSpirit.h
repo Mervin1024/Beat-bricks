@@ -43,6 +43,8 @@ typedef struct {
 
 @property (assign, nonatomic) BOOL movementState;
 
++ (double)radianFromAngle:(double)angle;
++ (double)angleFromRadian:(double)radian;
 //                       angle(360°)             velocity = CGPoint/0.1s
 - (void)moveWithAngle:(double)angle velocity:(double)velocity;
 - (void)setSportsSpiritCenter:(CGPoint)center;
