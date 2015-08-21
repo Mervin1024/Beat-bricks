@@ -39,8 +39,8 @@
         return;
     }
     CGPoint center = _currentCenter;
-    _currentCenter.x = _currentCenter.x + velocity/10 * cos(angle/180*M_PI);
-    _currentCenter.y = _currentCenter.y - velocity/10 * sin(angle/180*M_PI);
+    _currentCenter.x = _currentCenter.x + velocity/100 * cos(angle/180*M_PI);
+    _currentCenter.y = _currentCenter.y - velocity/100 * sin(angle/180*M_PI);
     [self setCurrentBoundsWithCenter:_currentCenter];
     // 终止条件
     NSDictionary *(^condition)(void) = [self terminationConditionOfSportsSpirit];
@@ -74,7 +74,7 @@
     self.center = _currentCenter;
 
     NSDictionary *dic = @{@"velocity":@(velocity),@"angle":@(angle)};
-    [self performSelector:@selector(repeat:) withObject:dic afterDelay:0.01];
+    [self performSelector:@selector(repeat:) withObject:dic afterDelay:0.001];
 }
 
 - (void)repeat:(NSDictionary *)sender{
