@@ -19,6 +19,7 @@
 		C9FCD1DE1B73B8B600383834 /* Beat_bricksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1DD1B73B8B600383834 /* Beat_bricksTests.m */; };
 		C9FCD1EF1B74C66900383834 /* SportsSpirit.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1EE1B74C66900383834 /* SportsSpirit.m */; };
 		C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1F41B74DBD800383834 /* SmallBall.m */; };
+		EEAF658C1B86E7F000D7DF31 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAF658B1B86E7F000D7DF31 /* StartButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		C9FCD1EE1B74C66900383834 /* SportsSpirit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportsSpirit.m; sourceTree = "<group>"; };
 		C9FCD1F31B74DBD800383834 /* SmallBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallBall.h; sourceTree = "<group>"; };
 		C9FCD1F41B74DBD800383834 /* SmallBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallBall.m; sourceTree = "<group>"; };
+		EEAF658A1B86E7F000D7DF31 /* StartButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartButton.h; sourceTree = "<group>"; };
+		EEAF658B1B86E7F000D7DF31 /* StartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				C9733DC71B7A2A06005C9117 /* Baffle.m */,
 				C9733DC91B7A2D98005C9117 /* TouchView.h */,
 				C9733DCA1B7A2D98005C9117 /* TouchView.m */,
+				EEAF658A1B86E7F000D7DF31 /* StartButton.h */,
+				EEAF658B1B86E7F000D7DF31 /* StartButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				C96D5BC71B7C938900AA49FD /* Brick.m in Sources */,
 				C9FCD1C41B73B8B500383834 /* main.m in Sources */,
 				C9FCD1EF1B74C66900383834 /* SportsSpirit.m in Sources */,
+				EEAF658C1B86E7F000D7DF31 /* StartButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

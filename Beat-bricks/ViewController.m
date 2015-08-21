@@ -116,24 +116,24 @@ NSInteger const numberOfBricksAtRow = 17;
 }
 
 - (void)initButton{
-    _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _startButton.frame = CGRectMake(self.view.frame.origin.x+35, 35, 40, 20);
+    _startButton = [StartButton buttonWithFrame:CGRectMake(self.view.center.x-40, self.view.center.y-20, 80, 40)];
     [_startButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [_startButton setTitle:@"start" forState:UIControlStateNormal];
+    [_startButton showWithTitle:@"开始"];
+//    [_startButton setTitle:@"start" forState:UIControlStateNormal];
     [_startButton addTarget:self action:@selector(begin:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_startButton];
 }
 
 - (void)begin:(id)sender {
     if (!_smallBall.movementState) {
-        NSLog(@"START");
+        [_startButton dismiss];
         // reset smallBall
          _smallBall.movementState = YES;
         [_smallBall moveWithAngle:60 velocity:30.0];
         // reset baffle
         _baffle.moveEnabled = YES;
         // reset startButton
-        [_startButton setTitle:@"stop" forState:UIControlStateNormal];
+//        [_startButton setTitle:@"stop" forState:UIControlStateNormal];
         // reset bricks
         for (Brick *brick in remainingBricks) {
             brick.hitEnabled = YES;
@@ -148,7 +148,8 @@ NSInteger const numberOfBricksAtRow = 17;
         _baffle.moveEnabled = NO;
         [_baffle setBaffleCenter:initailBaffleCenter];
         // reset startButton
-        [_startButton setTitle:@"start" forState:UIControlStateNormal];
+//        [_startButton setTitle:@"start" forState:UIControlStateNormal];
+        [_startButton showWithTitle:@"重新开始"];
         // reset bricks
         
         [remainingBricks addObjectsFromArray:bricksBeHit];
@@ -206,13 +207,6 @@ NSInteger const numberOfBricksAtRow = 17;
         return YES;
     }
     
-//    ///////////////////
-//    if (_smallBall.aroundPoint.rightPoint.x >= 360) {
-//        smallBallHitBound = HitRightBound;
-//        return YES;
-//    }
-//    ////////////////////
-    
     if (_smallBall.aroundPoint.leftPoint.x <= 0) {
         smallBallHitBound = HitLeftBound;
         return YES;
@@ -220,13 +214,7 @@ NSInteger const numberOfBricksAtRow = 17;
     if (_smallBall.aroundPoint.bottomPoint.y >= self.view.frame.size.height) {
         [self begin:nil];
     }
-    
-//    ///////////////
-//    if (_smallBall.aroundPoint.bottomPoint.y >= 360) {
-//        smallBallHitBound = HitBottomBound;
-//        return YES;
-//    }
-//    //////////////
+
     return NO;
 }
 // Bricks 与 SmallBall 碰撞检测
