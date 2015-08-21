@@ -20,6 +20,7 @@
 		C9FCD1EF1B74C66900383834 /* SportsSpirit.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1EE1B74C66900383834 /* SportsSpirit.m */; };
 		C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1F41B74DBD800383834 /* SmallBall.m */; };
 		EEAF658C1B86E7F000D7DF31 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAF658B1B86E7F000D7DF31 /* StartButton.m */; };
+		EEAF658F1B86FFB900D7DF31 /* BricksOfAll.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAF658E1B86FFB900D7DF31 /* BricksOfAll.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		C9FCD1F41B74DBD800383834 /* SmallBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallBall.m; sourceTree = "<group>"; };
 		EEAF658A1B86E7F000D7DF31 /* StartButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartButton.h; sourceTree = "<group>"; };
 		EEAF658B1B86E7F000D7DF31 /* StartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartButton.m; sourceTree = "<group>"; };
+		EEAF658D1B86FFB900D7DF31 /* BricksOfAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BricksOfAll.h; sourceTree = "<group>"; };
+		EEAF658E1B86FFB900D7DF31 /* BricksOfAll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BricksOfAll.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,8 @@
 				C9733DCA1B7A2D98005C9117 /* TouchView.m */,
 				EEAF658A1B86E7F000D7DF31 /* StartButton.h */,
 				EEAF658B1B86E7F000D7DF31 /* StartButton.m */,
+				EEAF658D1B86FFB900D7DF31 /* BricksOfAll.h */,
+				EEAF658E1B86FFB900D7DF31 /* BricksOfAll.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 			files = (
 				C9FCD1CA1B73B8B500383834 /* ViewController.m in Sources */,
 				C9FCD1C71B73B8B500383834 /* AppDelegate.m in Sources */,
+				EEAF658F1B86FFB900D7DF31 /* BricksOfAll.m in Sources */,
 				C9733DCB1B7A2D98005C9117 /* TouchView.m in Sources */,
 				C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */,
 				C9733DC81B7A2A06005C9117 /* Baffle.m in Sources */,

@@ -12,6 +12,7 @@
 #import "Baffle.h"
 #import "Brick.h"
 #import "StartButton.h"
+#import "BricksOfAll.h"
 
 @interface ViewController : UIViewController
 

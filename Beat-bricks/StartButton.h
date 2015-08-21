@@ -10,7 +10,8 @@
 
 @interface StartButton : UIButton
 
-+ (instancetype)buttonWithFrame:(CGRect)frame;
+- (instancetype)initWithCenter:(CGPoint)center;
++ (instancetype)buttonWithCenter:(CGPoint)center;
 
 - (void)showWithTitle:(NSString *)title;
 - (void)dismiss;
