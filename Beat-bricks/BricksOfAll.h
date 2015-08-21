@@ -18,4 +18,6 @@
 @property (copy, nonatomic) NSMutableArray *oringeBricks;
 @property (copy, nonatomic) NSMutableArray *greenBricks;
 @property (copy, nonatomic) NSMutableArray *pinkBricks;
+
+@property (copy, nonatomic) NSArray *animateItems;
 @end

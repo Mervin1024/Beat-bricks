@@ -21,6 +21,7 @@
 		C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCD1F41B74DBD800383834 /* SmallBall.m */; };
 		EEAF658C1B86E7F000D7DF31 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAF658B1B86E7F000D7DF31 /* StartButton.m */; };
 		EEAF658F1B86FFB900D7DF31 /* BricksOfAll.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAF658E1B86FFB900D7DF31 /* BricksOfAll.m */; };
+		EEAF65921B8717C200D7DF31 /* BricksView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAF65911B8717C200D7DF31 /* BricksView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		EEAF658B1B86E7F000D7DF31 /* StartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartButton.m; sourceTree = "<group>"; };
 		EEAF658D1B86FFB900D7DF31 /* BricksOfAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BricksOfAll.h; sourceTree = "<group>"; };
 		EEAF658E1B86FFB900D7DF31 /* BricksOfAll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BricksOfAll.m; sourceTree = "<group>"; };
+		EEAF65901B8717C200D7DF31 /* BricksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BricksView.h; sourceTree = "<group>"; };
+		EEAF65911B8717C200D7DF31 /* BricksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BricksView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				EEAF658B1B86E7F000D7DF31 /* StartButton.m */,
 				EEAF658D1B86FFB900D7DF31 /* BricksOfAll.h */,
 				EEAF658E1B86FFB900D7DF31 /* BricksOfAll.m */,
+				EEAF65901B8717C200D7DF31 /* BricksView.h */,
+				EEAF65911B8717C200D7DF31 /* BricksView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				EEAF658F1B86FFB900D7DF31 /* BricksOfAll.m in Sources */,
 				C9733DCB1B7A2D98005C9117 /* TouchView.m in Sources */,
 				C9FCD1F51B74DBD800383834 /* SmallBall.m in Sources */,
+				EEAF65921B8717C200D7DF31 /* BricksView.m in Sources */,
 				C9733DC81B7A2A06005C9117 /* Baffle.m in Sources */,
 				C96D5BC71B7C938900AA49FD /* Brick.m in Sources */,
 				C9FCD1C41B73B8B500383834 /* main.m in Sources */,

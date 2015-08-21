@@ -77,25 +77,27 @@
      四角碰撞
      
      */
-    CGPoint leftBottomCorner = CGPointMake(self.frame.origin.x, self.frame.origin.y+self.frame.size.height);
+    CGPoint leftBottomCorner = CGPointMake((self.currentCenter.x-self.frame.size.width/2), (self.currentCenter.y-self.frame.size.height/2)+self.frame.size.height);
     if ([self distanceOfPoint:leftBottomCorner anotherPoint:smallBall.currentCenter] <= smallBall.radius) {
         if (smallBall.aroundPoint.topPoint.x >= leftBottomCorner.x ||
             smallBall.aroundPoint.rightPoint.y <= leftBottomCorner.y) {
             
         }else{
-                        NSLog(@"左下角");
+            _moveEnabled = NO;
+//                        NSLog(@"左下角");
             double newAngle = [self reflectionAngleWithSmallBall:smallBall point:leftBottomCorner];
             [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
             return;
         }
     }
-    CGPoint rightBottomCorner = CGPointMake(self.frame.origin.x+self.frame.size.width, self.frame.origin.y+self.frame.size.height);
+    CGPoint rightBottomCorner = CGPointMake((self.currentCenter.x-self.frame.size.width/2)+self.frame.size.width, (self.currentCenter.y-self.frame.size.height/2)+self.frame.size.height);
     if ([self distanceOfPoint:rightBottomCorner anotherPoint:smallBall.currentCenter] <= smallBall.radius) {
         if (smallBall.aroundPoint.topPoint.x <= rightBottomCorner.x ||
             smallBall.aroundPoint.leftPoint.y <= rightBottomCorner.y) {
             
         }else{
-                        NSLog(@"右下角");
+            _moveEnabled = NO;
+//                        NSLog(@"右下角");
             double newAngle = [self reflectionAngleWithSmallBall:smallBall point:rightBottomCorner];
             [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
             return;
@@ -108,6 +110,7 @@
             smallBall.aroundPoint.rightPoint.y >= leftTopCorner.y) {
             
         }else{
+            _moveEnabled = NO;
 //                        NSLog(@"左上角");
             double newAngle = [self reflectionAngleWithSmallBall:smallBall point:leftTopCorner];
             [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
@@ -115,13 +118,15 @@
         }
     }
     //    }
-    CGPoint rightTopCorner = CGPointMake(self.frame.origin.x+self.frame.size.width, self.frame.origin.y);
+    CGPoint rightTopCorner = CGPointMake((self.currentCenter.x-self.frame.size.width/2)+self.frame.size.width, (self.currentCenter.y-self.frame.size.height/2));
     if ([self distanceOfPoint:rightTopCorner anotherPoint:smallBall.currentCenter] <= smallBall.radius) {
         if (smallBall.aroundPoint.bottomPoint.x <= rightTopCorner.x ||
             smallBall.aroundPoint.leftPoint.y >= rightTopCorner.y) {
             
         }else{
+            _moveEnabled = NO;
 //                        NSLog(@"右上角");
+//            NSLog(@"%@",NSStringFromCGPoint(smallBall.currentCenter));
             double newAngle = [self reflectionAngleWithSmallBall:smallBall point:rightTopCorner];
             [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
             return;
@@ -133,34 +138,39 @@
      四边碰撞
      
      */
-    if (smallBall.currentCenter.x >= self.frame.origin.x &&
-        smallBall.currentCenter.x <= self.frame.origin.x+self.frame.size.width) {
-        if (smallBall.currentCenter.y - (self.frame.origin.y+self.frame.size.height) <= smallBall.radius &&
-            smallBall.currentCenter.y - (self.frame.origin.y+self.frame.size.height) > 0) {
+    if (smallBall.currentCenter.x >= (self.currentCenter.x-self.frame.size.width/2) &&
+        smallBall.currentCenter.x <= (self.currentCenter.x-self.frame.size.width/2)+self.frame.size.width) {
+        if (smallBall.currentCenter.y - ((self.currentCenter.y-self.frame.size.height/2)+self.frame.size.height) <= smallBall.radius &&
+            smallBall.currentCenter.y - ((self.currentCenter.y-self.frame.size.height/2)+self.frame.size.height) > 0) {
+            _moveEnabled = NO;
             double newAngle = 360-smallBall.currentAngle;
             [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
             //            NSLog(@"下边界");
             return;
         }
-        if (self.frame.origin.y - smallBall.currentCenter.y <= smallBall.radius &&
-            self.frame.origin.y - smallBall.currentCenter.y > 0) {;
+        if ((self.currentCenter.y-self.frame.size.height/2) - smallBall.currentCenter.y <= smallBall.radius &&
+            (self.currentCenter.y-self.frame.size.height/2) - smallBall.currentCenter.y > 0) {
+            _moveEnabled = NO;
             double newAngle = 360-smallBall.currentAngle;
             [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
 //                        NSLog(@"上边界");
             return;
         }
     }
-    if (smallBall.currentCenter.y <= self.frame.origin.y+self.frame.size.height &&
-        smallBall.currentCenter.y >= self.frame.origin.y) {
-            if (self.frame.origin.x - smallBall.currentCenter.x <= smallBall.radius &&
-                self.frame.origin.x - smallBall.currentCenter.x > 0) {
+    if (smallBall.currentCenter.y <= (self.currentCenter.y-self.frame.size.height/2)+self.frame.size.height &&
+        smallBall.currentCenter.y >= (self.currentCenter.y-self.frame.size.height/2)) {
+            if ((self.currentCenter.x-self.frame.size.width/2) - smallBall.currentCenter.x <= smallBall.radius &&
+                (self.currentCenter.x-self.frame.size.width/2) - smallBall.currentCenter.x > 0) {
+                _moveEnabled = NO;
                 double newAngle = 180-smallBall.currentAngle;
                 [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
 //                NSLog(@"左边界");
                 return;
             }
-            if (smallBall.currentCenter.x - (self.frame.origin.x+self.frame.size.width) <= smallBall.radius &&
-                smallBall.currentCenter.x - (self.frame.origin.x+self.frame.size.width) > 0) {
+        
+            if (smallBall.currentCenter.x - ((self.currentCenter.x-self.frame.size.width/2)+self.frame.size.width) <= smallBall.radius &&
+                smallBall.currentCenter.x - ((self.currentCenter.x-self.frame.size.width/2)+self.frame.size.width) > 0) {
+                _moveEnabled = NO;
                 double newAngle = 180-smallBall.currentAngle;
                 [self.delegate baffle:self didHitAngle:newAngle velocity:smallBall.currentVelocity];
 //                NSLog(@"右边界");

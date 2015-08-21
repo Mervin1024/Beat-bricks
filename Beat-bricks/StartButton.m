@@ -50,9 +50,10 @@
     }
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha = 1;
+    } completion:^(BOOL finished){
+        startAnimation = YES;
+        [self setAnimate];
     }];
-    startAnimation = YES;
-    [self performSelector:@selector(setAnimate) withObject:nil afterDelay:0.5];
 }
 
 - (void)dismiss{
@@ -77,21 +78,24 @@
 
 - (void)shakeStart{
     if (count >= 3) {
-        [self performSelector:@selector(setAnimate) withObject:nil afterDelay:2];
+        [self setAnimate];
         return;
     }
     [UIView animateWithDuration:0.1 animations:^{
         self.transform = CGAffineTransformRotate(self.transform, M_PI/6);
+    } completion:^(BOOL finished){
+        [self shakeStop];
     }];
-    [self performSelector:@selector(shakeStop) withObject:nil afterDelay:0.1];
 }
 
 - (void)shakeStop{
     [UIView animateWithDuration:0.1 animations:^{
         self.transform = CGAffineTransformRotate(self.transform, -M_PI/6);
+        
+    } completion:^(BOOL finished){
         count++;
+        [self shakeStart];
     }];
-    [self performSelector:@selector(shakeStart) withObject:nil afterDelay:0.1];
 }
 
 @end

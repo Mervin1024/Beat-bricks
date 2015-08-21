@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "BricksView.h"
 
 @interface ViewController ()<SportsSpiritDelegate,BrickDelegate,BaffleDelegate>{
 //    BOOL start;
@@ -18,6 +19,7 @@
     BOOL isHitWithBricks;
     BOOL isHitWithBaffle;
     NSDictionary *stateOfBallDidHit;
+    BricksView *bricksView;
 //    NSMutableArray *whiteBricks;
 //    NSMutableArray *oringeBricks;
 //    NSMutableArray *greenBricks;
@@ -51,11 +53,13 @@ CGFloat const distanceOfLine = 35.0f;
 - (void)initBricks{
     remainingBricks = [NSMutableArray array];
     bricksBeHit = [NSMutableArray array];
-    _bricksOfAll = [BricksOfAll bricksOfAll];
+    bricksView = [[BricksView alloc]initWithFrame:self.view.frame];
+    _bricksOfAll = bricksView.allBricks;
     for (Brick *brick in _bricksOfAll) {
         brick.Brickdelegate = self;
-        [self.view addSubview:brick];
+//        [self.view addSubview:brick];
     }
+    [self.view addSubview:bricksView];
     isHitWithBricks = NO;
     [remainingBricks addObjectsFromArray:_bricksOfAll];
     
@@ -94,13 +98,13 @@ CGFloat const distanceOfLine = 35.0f;
         [_startButton dismiss];
         // reset smallBall
          _smallBall.movementState = YES;
-        [_smallBall moveWithAngle:55 velocity:30.0];
-        // reset baffle
-        _baffle.moveEnabled = YES;
+        
         // reset bricks
+        [bricksView show];
         for (Brick *brick in remainingBricks) {
             brick.hitEnabled = YES;
         }
+        [self performSelector:@selector(smallBallMoving) withObject:nil afterDelay:1.8];
         
     }else{
         // reset smallBall
@@ -112,10 +116,11 @@ CGFloat const distanceOfLine = 35.0f;
         // reset bricks
         
         [remainingBricks addObjectsFromArray:bricksBeHit];
-        for (Brick *brick in bricksBeHit) {
-            [self.view addSubview:brick];
-            brick.hitEnabled = NO;
-        }
+        [bricksView dismiss];
+//        for (Brick *brick in bricksBeHit) {
+////            [self.view addSubview:brick];
+//            brick.hitEnabled = NO;
+//        }
         bricksBeHit = [NSMutableArray array];
         // reset startButton
         [_startButton removeFromSuperview];
@@ -123,6 +128,13 @@ CGFloat const distanceOfLine = 35.0f;
         [_startButton showWithTitle:@"重新开始"];
     }
     
+}
+
+- (void)smallBallMoving{
+    
+    [_smallBall moveWithAngle:55 velocity:30.0];
+    // reset baffle
+    _baffle.moveEnabled = YES;
 }
 
 #pragma mark - Small Ball Delegate
@@ -151,26 +163,11 @@ CGFloat const distanceOfLine = 35.0f;
 // Baffle 与 SmallBall 碰撞检测
 #pragma mark - BrickDelegate
 - (BOOL)baffle:(Baffle *)baffle didHitAngle:(double)angle velocity:(double)velocity{
-    baffle.moveEnabled = NO;
     isHitWithBaffle = YES;
     stateOfBallDidHit = @{@"movementState":@YES,@"angle":@(angle)};
     return YES;
 }
 
-- (BOOL)isHitWithBaffle{
-    CGFloat distance = _baffle.currentCenter.y - _smallBall.currentCenter.y;
-    if (distance < 0) {
-        return NO;
-    }
-    if (distance < _smallBall.radius){
-        if (_smallBall.aroundPoint.bottomPoint.x >= _baffle.frame.origin.x &&
-            _smallBall.aroundPoint.bottomPoint.x <= _baffle.frame.origin.x+baffleSize.width) {
-            smallBallHitBound = HitBottomBound;
-            return YES;
-        }
-    }
-    return NO;
-}
 // ViewBounds 与 SmallBall 碰撞检测
 - (BOOL)isHitWithViewBounds{
     if (_smallBall.aroundPoint.topPoint.y <= 0) {
@@ -197,7 +194,8 @@ CGFloat const distanceOfLine = 35.0f;
 - (BOOL)birck:(Brick *)brick didHitAngle:(double)angle velocity:(double)velocity{
     isHitWithBricks = YES;
     stateOfBallDidHit = @{@"movementState":@YES,@"angle":@(angle)};
-    [brick removeFromSuperview];
+//    [brick removeFromSuperview];
+    brick.alpha = 0;
     [remainingBricks removeObject:brick];
     [bricksBeHit addObject:brick];
     brick.hitEnabled = NO;
