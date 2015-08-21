@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "TouchView.h"
 
+@class Baffle;
+@protocol BaffleDelegate <NSObject>
+
+- (BOOL)baffle:(Baffle *)baffle didHitAngle:(double)angle velocity:(double)velocity;
+
+@end
+
 @interface Baffle : UIImageView<TouchViewDelegate>
 
 @property (strong, nonatomic) TouchView *touchView;
@@ -20,4 +27,6 @@
 - (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)view;
 - (instancetype)initWithCenter:(CGPoint)center size:(CGSize)size superView:(UIView *)view;
 + (instancetype)baffleWithCenter:(CGPoint)center size:(CGSize)size superView:(UIView *)view;
+
+@property (weak, nonatomic) id<BaffleDelegate> delegate;
 @end
