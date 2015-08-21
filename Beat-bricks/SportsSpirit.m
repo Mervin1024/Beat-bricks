@@ -39,8 +39,8 @@
         return;
     }
     CGPoint center = _currentCenter;
-    _currentCenter.x = _currentCenter.x + velocity/10 * cos(angle/180*M_PI);
-    _currentCenter.y = _currentCenter.y - velocity/10 * sin(angle/180*M_PI);
+    _currentCenter.x = _currentCenter.x + 1 * cos(angle/180*M_PI);
+    _currentCenter.y = _currentCenter.y - 1 * sin(angle/180*M_PI);
     [self setCurrentBoundsWithCenter:_currentCenter];
     // 终止条件
     NSDictionary *(^condition)(void) = [self terminationConditionOfSportsSpirit];
@@ -70,11 +70,21 @@
         _movementState = NO;
         return;
     }
-    [UIView animateWithDuration:0.01 animations:^{
-        self.center = _currentCenter;
-    }completion:^(BOOL finished){
-        [self moveWithAngle:angle velocity:velocity];
-    }];
+    
+//    [UIView animateWithDuration:0.100/velocity animations:^{
+//        self.center = _currentCenter;
+//    }completion:^(BOOL finished){
+//        [self moveWithAngle:angle velocity:velocity];
+//    }];
+//}
+    self.center = _currentCenter;
+    
+        NSDictionary *dic = @{@"velocity":@(velocity),@"angle":@(angle)};
+        [self performSelector:@selector(repeat:) withObject:dic afterDelay:0.100/velocity];
+    
+}
+- (void)repeat:(NSDictionary *)sender{
+        [self moveWithAngle:[[sender objectForKey:@"angle"] doubleValue] velocity:[[sender objectForKey:@"velocity"] doubleValue]];
 }
 
 - (void)setSportsSpiritCenter:(CGPoint)center{
